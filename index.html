@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DFV • Kosmetria</title>
+    <!-- Fuentes corregidas -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Poppins:wght@300;400;500;600&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --lino: #EAE3D7;
+            --salvia: #A7B4A0;
+            --oliva: #747957;
+            --oliva-oscuro: #5c6144;
+            --oliva-claro: #8a8f6a;
+            --salvia-claro: #b8c4b0;
+            --fondo-oscuro: #2a2c20;
+            --fondo-mas-oscuro: #1f2018;
+            
+            --bg-color: var(--fondo-mas-oscuro);
+            --text-color: var(--lino);
+            --acento: var(--salvia);
+            --acento-fuerte: var(--oliva);
+            --acento-claro: var(--salvia-claro);
+            --acento-oscuro: var(--oliva-oscuro);
+            --gradient-oliva: linear-gradient(135deg, var(--lino) 0%, var(--salvia) 40%, var(--oliva) 100%);
+            --gradient-salvia: linear-gradient(135deg, var(--salvia-claro) 0%, var(--salvia) 100%);
+            --card-bg: rgba(42, 44, 32, 0.78);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        h1, h2, h3, h4, .logo-emblem {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        /* Fondo dinámico */
+        #dynamic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -3;
+            background: linear-gradient(rgba(31, 32, 24, 0.3), rgba(31, 32, 24, 0.6)),
+                        url('km.jpg') center 25% / cover no-repeat;
+            background-attachment: fixed;
+            filter: brightness(1.1) contrast(1.15);
+            transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        canvas.particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        /* ENCABEZADO — Fondo transparente */
+        header.top-header.kosmetria-clean-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 6%;
+            background: transparent !important;
+            backdrop-filter: none !important;
+            box-shadow: none !important;
+            border: none !important;
+            z-index: 1000;
+        }
+        
+        .nav-btn-reserve {
+            padding: 8px 22px !important;
+            background: var(--gradient-oliva) !important;
+            color: var(--fondo-mas-oscuro) !important;
+            border-radius: 20px;
+            font-weight: 600 !important;
+            text-decoration: none;
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-btn-reserve:hover {
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 650px) {
+            header.top-header { padding: 14px 4%; }
+        }
+        
+        /* Hero section */
+        section.hero {
+            min-height: 94vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 95px 20px 40px;
+            position: relative;
+        }
+        
+        .hero span {
+            color: var(--salvia);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+        }
+        
+        .hero h1 {
+            font-size: 3.8rem;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            background: var(--gradient-oliva);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+        }
+        
+        .hero p {
+            font-size: 1.15rem;
+            color: var(--lino);
+            max-width: 720px;
+            margin-bottom: 25px;
+            line-height: 1.75;
+            font-weight: 300;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+        }
+        
+        .hero-stats {
+            display: flex;
+            gap: 45px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .hero-stat-item h4 {
+            font-size: 1.8rem;
+            color: var(--salvia);
+            font-family: 'Playfair Display', serif;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.95);
+        }
+        
+        .hero-stat-item p {
+            font-size: 0.82rem;
+            color: var(--lino);
+            letter-spacing: 1px;
+            margin-bottom: 0;
+            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.95);
+        }
+        
+        /* BOTONES DEL MENÚ */
+        .hero-menu-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+        
+        .hero-menu-buttons .menu-box {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 190px;
+            min-height: 52px;
+            padding: 12px 22px;
+            border: 1px solid rgba(167, 180, 160, 0.45);
+            border-radius: 9px;
+            background: rgba(42, 44, 32, 0.72);
+            color: var(--lino);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.08em;
+            transition: all .25s ease;
+            backdrop-filter: blur(8px);
+        }
+        
+        .hero-menu-buttons .menu-box:hover,
+        .hero-menu-buttons .menu-box.active {
+            background: rgba(167, 180, 160, 0.18);
+            border-color: rgba(167, 180, 160, 0.85);
+            color: var(--salvia-claro);
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 600px) {
+            .hero-menu-buttons { gap: 7px; }
+            .hero-menu-buttons .menu-box {
+                min-width: 0;
+                width: 50%;
+                min-height: 48px;
+                padding: 10px 8px;
+                font-size: 0.78rem;
+            }
+        }
+        
+        /* Sección Kosmetria */
+        section.division-section {
+            padding: 90px 8%;
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 70px;
+        }
+        
+        .section-header span {
+            color: var(--salvia);
+            font-size: 0.85rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+        }
+        
+        .section-header h2 {
+            font-size: 2.7rem;
+            margin-top: 10px;
+            color: var(--lino);
+            text-shadow: 0 4px 20px rgba(0,0,0,0.9);
+        }
+        
+        .section-header hr {
+            width: 90px;
+            height: 1px;
+            background: var(--salvia);
+            border: none;
+            margin: 20px auto 0;
+        }
+        
+        .category-group {
+            margin-bottom: 70px;
+        }
+        
+        .category-title {
+            font-size: 1.75rem;
+            color: var(--salvia);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+        }
+        
+        .category-subtitle-info {
+            font-size: 0.98rem;
+            color: var(--lino);
+            margin-bottom: 35px;
+            font-weight: 300;
+            max-width: 820px;
+            line-height: 1.65;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+        }
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+            gap: 30px;
+        }
+        
+        .kos-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(167, 180, 160, 0.38);
+            padding: 38px 28px;
+            border-radius: 20px;
+            transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .kos-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--gradient-salvia);
+            transition: width 0.4s ease;
+        }
+        
+        .kos-card:hover {
+            border-color: var(--salvia);
+            transform: translateY(-8px);
+            box-shadow: 0 22px 48px rgba(0,0,0,0.85);
+            background: rgba(47, 49, 36, 0.88);
+        }
+        
+        .kos-card:hover::before {
+            width: 100%;
+        }
+        
+        .kos-card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 22px;
+        }
+        
+        .kos-card i.main-icon {
+            font-size: 2rem;
+            color: var(--salvia);
+        }
+        
+        .duration-badge {
+            font-size: 0.78rem;
+            color: var(--lino);
+            letter-spacing: 0.8px;
+            border: 1px solid rgba(167, 180, 160, 0.35);
+            padding: 4px 12px;
+            border-radius: 12px;
+            background: rgba(0,0,0,0.55);
+        }
+        
+        .kos-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: var(--lino);
+        }
+        
+        .kos-card p.description {
+            color: var(--lino);
+            opacity: 0.85;
+            font-size: 0.95rem;
+            line-height: 1.65;
+            margin-bottom: 20px;
+        }
+        
+        .protocol-steps {
+            background: rgba(0, 0, 0, 0.58);
+            border-left: 2px solid rgba(167, 180, 160, 0.65);
+            padding: 14px 16px;
+            border-radius: 0 10px 10px 0;
+            margin-bottom: 25px;
+        }
+        
+        .protocol-steps h5 {
+            font-size: 0.78rem;
+            color: var(--salvia);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+        }
+        
+        .protocol-steps ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .protocol-steps li {
+            font-size: 0.84rem;
+            color: var(--lino);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .protocol-steps li i {
+            font-size: 0.45rem;
+            color: var(--salvia);
+        }
+        
+        .card-footer-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: 15px;
+            border-top: 1px solid rgba(167, 180, 160, 0.22);
+        }
+        
+        .precio-tag {
+            padding: 6px 18px;
+            border-radius: 20px;
+            border: 1px solid rgba(167, 180, 160, 0.65);
+            color: var(--salvia-claro);
+            font-size: 0.88rem;
+            font-weight: 600;
+            background: rgba(31, 32, 24, 0.75);
+            letter-spacing: 0.5px;
+        }
+        
+        .quick-select-btn {
+            font-size: 0.82rem;
+            color: var(--lino);
+            opacity: 0.8;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+        
+        .quick-select-btn:hover {
+            color: var(--salvia-claro);
+        }
+        
+        /* Banner de Protocolo Insignia */
+        .master-kos-banner {
+            background: linear-gradient(135deg, rgba(167, 180, 160, 0.28), rgba(31, 32, 24, 0.88));
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(167, 180, 160, 0.55);
+            border-radius: 24px;
+            padding: 55px 45px;
+            margin-bottom: 80px;
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        
+        @media (max-width: 950px) {
+            .master-kos-banner { grid-template-columns: 1fr; text-align: center; }
+            .master-kos-banner .master-cta { justify-content: center; }
+        }
+        
+        .master-badge {
+            color: var(--salvia);
+            font-size: 0.82rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+        }
+        
+        .master-kos-banner h3 {
+            font-size: 2.4rem;
+            color: var(--lino);
+            margin-bottom: 15px;
+            line-height: 1.25;
+            text-shadow: 0 4px 18px rgba(0,0,0,0.9);
+        }
+        
+        .master-kos-banner p {
+            color: var(--lino);
+            opacity: 0.9;
+            font-size: 1.02rem;
+            line-height: 1.7;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+        }
+        
+        .master-cta {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: flex-end;
+        }
+        
+        @media (max-width: 950px) {
+            .master-cta { align-items: center; }
+        }
+        
+        .btn-gold {
+            padding: 15px 38px;
+            background: var(--gradient-oliva);
+            border: none;
+            color: var(--fondo-mas-oscuro);
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-gold:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 14px 30px rgba(167, 180, 160, 0.4);
+        }
+        
+        /* Bloque de Reserva */
+        .booking-section {
+            background: rgba(42, 44, 32, 0.90);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(167, 180, 160, 0.45);
+            border-radius: 24px;
+            padding: 60px 45px;
+            max-width: 860px;
+            margin: 50px auto 0;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.88);
+        }
+        
+        .booking-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+        
+        .form-group label {
+            font-size: 0.9rem;
+            color: var(--salvia-claro);
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background: rgba(31, 32, 24, 0.7);
+            border: 1px solid rgba(167, 180, 160, 0.35);
+            border-radius: 10px;
+            padding: 12px 16px;
+            color: var(--lino);
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--salvia);
+        }
+        
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(234, 227, 215, 0.4);
+        }
+        
+        .nota-precios {
+            font-size: 0.85rem;
+            color: var(--lino);
+            opacity: 0.7;
+            text-align: center;
+        }
+        
+        footer {
+            border-top: 1px solid rgba(167, 180, 160, 0.35);
+            padding: 45px 8%;
+            text-align: center;
+            color: var(--lino);
+            font-size: 0.86rem;
+            background: transparent !important;
+            backdrop-filter: none !important;
+            margin-top: 60px;
+        }
+        
+        /* Avatar guía - FIJO en pantalla */
+        #interactive-guide {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 100;
+            display: flex;
+            align-items: flex-end;
+            gap: 12px;
+        }
+        
+        .avatar-speech {
+            background: rgba(42, 44, 32, 0.9);
+            border: 1px solid rgba(167, 180, 160, 0.4);
+            border-radius: 16px;
+            padding: 14px 18px;
+            max-width: 280px;
+            font-size: 0.9rem;
+            color: var(--lino);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            order: 1;
+        }
+        
+        .avatar-speech.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .avatar-node {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            background: var(--gradient-oliva);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transition: transform 0.3s ease;
+            order: 2;
+            flex-shrink: 0;
+        }
+        
+        .avatar-node:hover {
+            transform: scale(1.1);
+        }
+        
+        .avatar-node svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--fondo-mas-oscuro);
+        }
+    </style>
+</head>
+<body onmousemove="parallaxBg(event)">
+    <div id="dynamic-bg"></div>
+    <canvas class="particles" id="particleCanvas"></canvas>
+    
+    <!-- ENCABEZADO -->
+    <header class="top-header kosmetria-clean-header">
+        <a href="#inicio" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
+            <span style="font-family: 'Cinzel', serif; font-size: 1.25rem; font-weight: bold; letter-spacing: 0.2em; color: var(--lino);">DFV</span>
+            <span style="font-family: 'Cinzel', serif; font-size: 0.75rem; letter-spacing: 0.1em; color: var(--salvia); border-left: 1px solid rgba(167, 180, 160, 0.5); padding-left: 8px;">COMPANY & CO.</span>
+        </a>
+        <a href="#reservar" class="nav-btn-reserve">Reservar Cita</a>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <span>Laboratorio Celular & Estética Botánica</span>
+        <h1>DFV Kosmetria</h1>
+        <p>Alta estética celular, protocolos de precisión dermo-botánica y sintonía áurica bajo la distinción y contraste que mereces.</p>
+        
+        <div class="hero-stats">
+            <div class="hero-stat-item">
+                <h4>9 Protocolos</h4>
+                <p>Especialidades</p>
+            </div>
+            <div class="hero-stat-item">
+                <h4>100%</h4>
+                <p>Activos Botánicos</p>
+            </div>
+            <div class="hero-stat-item">
+                <h4>VIP</h4>
+                <p>Atención Personal</p>
+            </div>
+        </div>
+        
+        <div class="hero-menu-buttons">
+            <a href="index.html" class="menu-box">Inicio</a>
+            <a href="#kosmetria" class="menu-box active">Kosmetria</a>
+        </div>
+    </section>
+    
+    <!-- SECCIÓN KOSMETRIA -->
+    <section class="division-section" id="kosmetria">
+        <div class="section-header">
+            <span>Laboratorio Celular & Alta Estética Botánica</span>
+            <h2>Kosmetria • Protocolos de Precisión</h2>
+            <hr>
+        </div>
+        
+        <div class="master-kos-banner">
+            <div>
+                <span class="master-badge">Protocolo Insignia DFV</span>
+                <h3>Matriz Celular & Oxigenación Dermo-Profunda</h3>
+                <p>Combina microdermoabrasión molecular suave, infusión de péptidos botánicos andinos y sellado aurico-termal con cuarzo blanco maestro para un efecto tensor y luminosidad de alta definición.</p>
+            </div>
+            <div class="master-cta">
+                <span class="precio-tag">Valor Integral: $45</span>
+                <a href="#reservar" class="btn-gold" onclick="selectServiceInForm('Matriz Celular & Oxigenación Dermo-Profunda ($45)')">Agendar Insignia</a>
+            </div>
+        </div>
+        
+        <div class="category-group">
+            <h3 class="category-title"><i class="fas fa-spa"></i> Belleza Celular Avanzada</h3>
+            <p class="category-subtitle-info">Tratamientos no invasivos para estimular síntesis endógena de colágeno y restaurar la barrera hidrolipídica.</p>
+            
+            <div class="cards-grid">
+                <div class="kos-card" onclick="triggerAvatarAdvice('Limpieza facial profunda con biopurificación botánica.')">
+                    <div>
+                        <div class="kos-card-top">
+                            <i class="fas fa-water main-icon"></i>
+                            <span class="duration-badge">60 min</span>
+                        </div>
+                        <h3>Limpieza Facial Molecular</h3>
+                        <p class="description">Desobstrucción de folículos sebáceos, extracción atraumática de comedones y baño ultrasónico de oxígeno activo.</p>
+                        <div class="protocol-steps">
+                            <h5>Fases del Protocolo</h5>
+                            <ul>
+                                <li><i class="fas fa-circle"></i> Biopreparación enzimática de epidermis</li>
+                                <li><i class="fas fa-circle"></i> Micro-extracciones con vapor ozonizado</li>
+                                <li><i class="fas fa-circle"></i> Máscara calmante de caléndula y zinc</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer-meta">
+                        <span class="precio-tag">Desde $20</span>
+                        <a href="#reservar" class="quick-select-btn" onclick="selectServiceInForm('Limpieza Facial Molecular (Desde $20)')">Seleccionar ➔</a>
+                    </div>
+                </div>
+                
+                <div class="kos-card" onclick="triggerAvatarAdvice('Tratamientos anti-age de redefinición celular y óvalo facial.')">
+                    <div>
+                        <div class="kos-card-top">
+                            <i class="fas fa-seedling main-icon"></i>
+                            <span class="duration-badge">75 min</span>
+                        </div>
+                        <h3>Tratamientos Anti-Age Tensor</h3>
+                        <p class="description">Reestructuración del óvalo facial mediante vectores de fitocolágeno, radiofrecuencia fraccionada dermo-suave y péptidos.</p>
+                        <div class="protocol-steps">
+                            <h5>Fases del Protocolo</h5>
+                            <ul>
+                                <li><i class="fas fa-circle"></i> Drenaje linfático facial de alta definición</li>
+                                <li><i class="fas fa-circle"></i> Infusión de hialurónico bajo peso molecular</li>
+                                <li><i class="fas fa-circle"></i> Crio-sellado tensor de contornos</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer-meta">
+                        <span class="precio-tag">Ref. $35</span>
+                        <a href="#reservar" class="quick-select-btn" onclick="selectServiceInForm('Tratamientos Anti-Age Tensor (Ref. $35)')">Seleccionar ➔</a>
+                    </div>
+                </div>
+                
+                <div class="kos-card" onclick="triggerAvatarAdvice('Micropigmentación de cejas y labios con simetría milimétrica.')">
+                    <div>
+                        <div class="kos-card-top">
+                            <i class="fas fa-feather-alt main-icon"></i>
+                            <span class="duration-badge">120 min</span>
+                        </div>
+                        <h3>Micropigmentación Simétrica</h3>
+                        <p class="description">Arquitectura de cejas pelo a pelo y revitalización de pigmento labial con gama hipoalergénica de larga duración.</p>
+                        <div class="protocol-steps">
+                            <h5>Fases del Protocolo</h5>
+                            <ul>
+                                <li><i class="fas fa-circle"></i> Geometría áurea y diseño digital previo</li>
+                                <li><i class="fas fa-circle"></i> Implantación subdérmica de pigmentos</li>
+                                <li><i class="fas fa-circle"></i> Kit de cicatrización acelerada bio-orgánica</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer-meta">
+                        <span class="precio-tag">Consulte valor</span>
+                        <a href="#reservar" class="quick-select-btn" onclick="selectServiceInForm('Micropigmentación Simétrica')">Seleccionar ➔</a>
+                    </div>
+                </div>
+                
+                <div class="kos-card" onclick="triggerAvatarAdvice('Masajes de liberación fascial y oxigenación dermo-muscular.')">
+                    <div>
+                        <div class="kos-card-top">
+                            <i class="fas fa-hands-wash main-icon"></i>
+                            <span class="duration-badge">55 min</span>
+                        </div>
+                        <h3>Masaje Fascial & Relax Dermo</h3>
+                        <p class="description">Liberación de adherencias miofasciales craneofaciales y cervicales con aceites esenciales botánicos de alta pureza.</p>
+                        <div class="protocol-steps">
+                            <h5>Fases del Protocolo</h5>
+                            <ul>
+                                <li><i class="fas fa-circle"></i> Aromaterapia inductiva frecuencia alpha</li>
+                                <li><i class="fas fa-circle"></i> Maniobras de lifting miofascial profundo</li>
+                                <li><i class="fas fa-circle"></i> Oxigenación de hombros, cuello y rostro</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer-meta">
+                        <span class="precio-tag">Desde $25</span>
+                        <a href="#reservar" class="quick-select-btn" onclick="selectServiceInForm('Masaje Fascial & Relax Dermo (Desde $25)')">Seleccionar ➔</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category-group">
+            <h3 class="category-title"><i class="fas fa-om"></i> Holística & Sintonía Áurica</h3>
+            <p class="category-subtitle-info">Complemento energético para liberar tensiones sutiles y alinear claridad mental y magnética.</p>
+            
+            <div class="cards-grid">
+                <div class="kos-card" onclick="triggerAvatarAdvice('Tarot terapéutico y arquetípico para claridad evolutiva.')">
+                    <div>
+                        <div class="kos-card-top">
+                            <i class="fas fa-star-of-david main-icon"></i>
+                            <span class="duration-badge">50 min</span>
+                        </div>
+                        <h3>Tarot Terapéutico Arquetípico</h3>
+                        <p class="description">Lectura de discernimiento interior, identificación de nudos subconscientes y mapas de evolución consciente personal.</p>
+                        <div class="protocol-steps">
+                            <h5>Fases del Protocolo</h5>
+                            <ul>
+                                <li><i class="fas fa-circle"></i> Sintonización de intención y campo vibratorio</li>
+                                <li><i class="fas fa-circle"></i> Lectura cruzada de arquetipos evolutivos</li>
+                                <li><i class="fas fa-circle"></i> Orientación práctica y anclaje</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer-meta">
+                        <span class="precio-tag">Aporte consciente</span>
+                        <a href="#reservar" class="quick-select-btn" onclick="selectServiceInForm('Tarot Terapéutico Arquetípico (Aporte consciente)')">Seleccionar ➔</a>
+                    </div>
+                </div>
+                
+                <div class="kos-card" onclick="triggerAvatarAdvice('Limpieza andina ancestral con sahumerio de hierbas de altura.')">
+                    <div>
+                        <div class="kos-card-top">
+                            <i class="fas fa-mountain main-icon"></i>
+                            <span class="duration-badge">60 min</span>
+                        </div>
+                        <h3>Limpieza Andina Ancestral</h3>
+                        <p class="description">Saneamiento áurico con plantas de altura de los Andes (muna, ruda, romero silvestre) y barrido energético por chakras.</p>
+                        <div class="protocol-steps">
+                            <h5>Fases del Protocolo</h5>
+                            <ul>
+                                <li><i class="fas fa-circle"></i> Sahumerio de purificación de campo sutil</li>
+                                <li><i class="fas fa-circle"></i> Limpieza con atados botánicos altoandinos</li>
+                                <li><i class="fas fa-circle"></i> Sello y bendición de equilibrio vital</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer-meta">
+                        <span class="precio-tag">$30</span>
+                        <a href="#reservar" class="quick-select-btn" onclick="selectServiceInForm('Limpieza Andina Ancestral ($30)')">Seleccionar ➔</a>
+                    </div>
+                </div>
+                
+                <div class="kos-card" onclick="triggerAvatarAdvice('Reiki de armonización y saneamiento de chakras mayores.')">
+                    <div>
+                        <div class="kos-card-top">
+                            <i class="fas fa-hand-holding-heart main-icon"></i>
+                            <span class="duration-badge">45 min</span>
+                        </div>
+                        <h3>Reiki de Alineación Vital</h3>
+                        <p class="description">Canalización de frecuencia de armonización universal para disolver fatiga mental y estabilizar el sistema nervioso.</p>
+                        <div class="protocol-steps">
+                            <h5>Fases del Protocolo</h5>
+                            <ul>
+                                <li><i class="fas fa-circle"></i> Diagnóstico cinético de 7 centros mayores</li>
+                                <li><i class="fas fa-circle"></i> Transferencia energética focalizada</li>
+                                <li><i class="fas fa-circle"></i> Armonización general de integración</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer-meta">
+                        <span class="precio-tag">$25</span>
+                        <a href="#reservar" class="quick-select-btn" onclick="selectServiceInForm('Reiki de Alineación Vital ($25)')">Seleccionar ➔</a>
+                    </div>
+                </div>
+                
+                <div class="kos-card" onclick="triggerAvatarAdvice('Cuarzos de poder y matriz geométrica áurica.')">
+                    <div>
+                        <div class="kos-card-top">
+                            <i class="fas fa-gem main-icon"></i>
+                            <span class="duration-badge">40 min</span>
+                        </div>
+                        <h3>Ritual con Cuarzos de Poder</h3>
+                        <p class="description">Disposición geométrica de cristales maestros tallados para amplificar la coherencia magnética y paz celular.</p>
+                        <div class="protocol-steps">
+                            <h5>Fases del Protocolo</h5>
+                            <ul>
+                                <li><i class="fas fa-circle"></i> Selección intuitiva de cristales maestros</li>
+                                <li><i class="fas fa-circle"></i> Posicionamiento de matriz en rejilla áurica</li>
+                                <li><i class="fas fa-circle"></i> Fijación de frecuencia magnética personal</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="card-footer-meta">
+                        <span class="precio-tag">Ritual / Incluido</span>
+                        <a href="#reservar" class="quick-select-btn" onclick="selectServiceInForm('Ritual con Cuarzos de Poder')">Seleccionar ➔</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- BLOQUE DE RESERVA -->
+    <section class="division-section" id="reservar">
+        <div class="booking-section">
+            <div class="section-header" style="margin-bottom: 20px;">
+                <span>Concierge & Agendamiento</span>
+                <h2>Solicitar Cita en DFV Kosmetria</h2>
+                <hr>
+            </div>
+            <p class="nota-precios" style="margin-top:0; margin-bottom:25px;">Selecciona el protocolo o tratamiento deseado en el listado desplegable:</p>
+            
+            <form class="booking-form" id="formKosmetria">
+                <div class="form-group">
+                    <label for="nombreKosmetria">Nombre y Apellido</label>
+                    <input type="text" id="nombreKosmetria" placeholder="Ej. Mariana Valdivieso" required>
+                </div>
+                <div class="form-group">
+                    <label for="telefonoKosmetria">Teléfono / WhatsApp</label>
+                    <input type="tel" id="telefonoKosmetria" placeholder="+593 99 999 9999" required>
+                </div>
+                <div class="form-group">
+                    <label for="serviceSelect">Protocolo de Kosmetria</label>
+                    <select id="serviceSelect" required>
+                        <option value="">Selecciona protocolo...</option>
+                        <optgroup label="Kosmetria • Estética Celular">
+                            <option value="Matriz Celular & Oxigenación Dermo-Profunda ($45)">Matriz Celular & Oxigenación Dermo-Profunda ($45)</option>
+                            <option value="Limpieza Facial Molecular (Desde $20)">Limpieza Facial Molecular (Desde $20)</option>
+                            <option value="Tratamientos Anti-Age Tensor (Ref. $35)">Tratamientos Anti-Age Tensor (Ref. $35)</option>
+                            <option value="Micropigmentación Simétrica">Micropigmentación Simétrica</option>
+                            <option value="Masaje Fascial & Relax Dermo (Desde $25)">Masaje Fascial & Relax Dermo (Desde $25)</option>
+                            <option value="Tarot Terapéutico Arquetípico (Aporte consciente)">Tarot Terapéutico Arquetípico (Aporte consciente)</option>
+                            <option value="Limpieza Andina Ancestral ($30)">Limpieza Andina Ancestral ($30)</option>
+                            <option value="Reiki de Alineación Vital ($25)">Reiki de Alineación Vital ($25)</option>
+                            <option value="Ritual con Cuarzos de Poder">Ritual con Cuarzos de Poder</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fechaKosmetria">Fecha Preferencial</label>
+                    <input type="date" id="fechaKosmetria" required>
+                </div>
+                <div class="form-group full">
+                    <label for="notasKosmetria">Notas o Requerimiento Específico</label>
+                    <textarea id="notasKosmetria" rows="3" placeholder="Ej. Piel sensible / horario de preferencia..."></textarea>
+                </div>
+                <div class="form-group full">
+                    <button type="submit" class="btn-gold" style="width: 100%;">
+                        <i class="fab fa-whatsapp"></i> Confirmar Cita Kosmetria
+                    </button>
+                </div>
+            </form>
+            <p class="nota-precios">* Los valores reflejados corresponden a guías de referencia para cada sesión dermo-botánica o holística.</p>
+        </div>
+    </section>
+    
+    <!-- Avatar Guía Dinámico -->
+    <div id="interactive-guide">
+        <div class="avatar-speech" id="avatarSpeech">Hola, soy tu guía DFVKosmetria. ¿En qué protocolo te asesoro hoy?</div>
+        <div class="avatar-node" onclick="cycleAvatarMessage()" title="Haz clic para interactuar">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
+            </svg>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2026 DFVKosmetria. Estética Celular, Botánica & Sintonía Áurica de Alta Definición.</p>
+    </footer>
+    
+    <script>
+        // Efecto parallax del fondo
+        function parallaxBg(e) {
+            const bg = document.getElementById('dynamic-bg');
+            const x = (e.clientX / window.innerWidth - 0.5) * 16;
+            const y = (e.clientY / window.innerHeight - 0.5) * 16;
+            bg.style.transform = `scale(1.05) translate(${x}px, ${y}px)`;
+        }
+        
+        // Partículas flotantes
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let width, height;
+        let particles = [];
+        
+        function resize() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+        
+        for (let i = 0; i < 50; i++) {
+            particles.push({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                radius: Math.random() * 1.8,
+                vx: (Math.random() - 0.5) * 0.28,
+                vy: (Math.random() - 0.5) * 0.28,
+                alpha: Math.random() * 0.6 + 0.2
+            });
+        }
+        
+        function animateParticles() {
+            ctx.clearRect(0, 0, width, height);
+            ctx.fillStyle = '#A7B4A0';
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                if (p.x < 0) p.x = width;
+                if (p.x > width) p.x = 0;
+                if (p.y < 0) p.y = height;
+                if (p.y > height) p.y = 0;
+                ctx.globalAlpha = p.alpha;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+        
+        // Seleccionar servicio desde tarjeta
+        function selectServiceInForm(serviceName) {
+            const selectEl = document.getElementById('serviceSelect');
+            if (selectEl) {
+                for (let opt of selectEl.options) {
+                    if (opt.value === serviceName) {
+                        selectEl.value = serviceName;
+                        break;
+                    }
+                }
+            }
+            triggerAvatarAdvice(`Seleccionado: ${serviceName}. Completa tus datos.`);
+        }
+        
+        // Avatar mensajes
+        const speechBubble = document.getElementById('avatarSpeech');
+        const messages = [
+            "Bienvenido a DFVKosmetria. Explora nuestra Estética Celular & Sintonía Áurica.",
+            "En Kosmetria, el Protocolo Insignia ($45) incluye péptidos andinos y cuarzo.",
+            "Reserva tu limpieza facial molecular o masaje fascial dermo-relax."
+        ];
+        let msgIndex = 0;
+        let speechTimeout;
+        
+        function triggerAvatarAdvice(customText) {
+            speechBubble.textContent = customText || messages[msgIndex];
+            speechBubble.classList.add('active');
+            clearTimeout(speechTimeout);
+            speechTimeout = setTimeout(() => {
+                speechBubble.classList.remove('active');
+            }, 6000);
+        }
+        
+        function cycleAvatarMessage() {
+            msgIndex = (msgIndex + 1) % messages.length;
+            triggerAvatarAdvice();
+        }
+        
+        // Mensaje inicial
+        setTimeout(() => 
+        {
+            triggerAvatarAdvice("¡Hola! Explora los protocolos de DFV Kosmetria.");
+        }, 1200);
+    </script>
+</body>
+</html>

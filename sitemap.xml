@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Página principal -->
+  <url>
+    <loc>https://dfvco.com/</loc>
+    <priority>1.00</priority>
+  </url>
+  <url>
+    <loc>https://dfvco.com/index.html</loc>
+    <priority>0.80</priority>
+  </url>
+
+  <!-- Secciones del sitio -->
+  <url>
+    <loc>https://dfvco.com/consultas.html</loc>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://dfvco.com/contactenos.html</loc>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://dfvco.com/galeria.html</loc>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://dfvco.com/eventos.html</loc>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://dfvco.com/habitaciones.html</loc>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://dfvco.com/marinabay.html</loc>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://dfvco.com/presentacion.html</loc>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://dfvco.com/servicios.html</loc>
+    <priority>0.80</priority>
+  </url>
+</urlset>
